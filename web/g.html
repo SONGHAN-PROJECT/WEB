@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SH</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free singlepage web template created by GraphBerry">
+    <meta name="keywords" content="HTML5, Bootstrap 3, CSS3, javascript, PHP, Responsive, Mobile">
+    <meta name="author" content="GraphBerry.com"/>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+	<link rel="stylesheet" type="text/css" href="static/css/g.css">
+</head>
+<body>
+
+	<header id="header">
+		<!-- Section title -->
+		<h1 class="sr-only"> Home page</h1>
+		<nav class="navbar navbar-default navbar-fixed-top">
+		  <!-- Section title -->
+		  <h1 class="sr-only">Main navigation</h1>
+		  <div class="container">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand smoothScroll" href="index.html">
+		        <img alt="Modus" src="static/img/logo.png">
+		      </a>
+		    </div>
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="main-navbar">
+		      <ul class="nav navbar-nav navbar-right">
+				  <li class="active"><a class="smoothScroll" href="#home">게시판 <span class="sr-only">(current)</span></a></li>
+				  <li><a class="smoothScroll" href="login.html">로그인</a></li>
+				  <li><a class="smoothScroll" href="signup.html">회원가입</a></li>
+<!--		        <li><a class="smoothScroll" href="#clients">Clients</a></li>-->
+<!--		        <li><a class="smoothScroll" href="#contact">Contact</a></li>-->
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container -->
+		</nav>
+	</header>
+
+	<main>
+<!--		<section id="home">-->
+<!--			&lt;!&ndash; Section title &ndash;&gt;-->
+<!--			<h1 class="sr-only">Home section</h1>-->
+<!--			<div class="overlay"></div>-->
+<!--			<div class="home-content">-->
+<!--				<div class="container">-->
+<!--					<div class="row">-->
+<!--						<div class="col-md-8 col-md-offset-2">-->
+<!--							<span class="h5">SH</span>-->
+<!--							<h2 class="h1">뭘봐요</h2>-->
+<!--							<div class="cta-container">-->
+<!--								<a href="g.html" class="btn btn-default">게시판</a>-->
+<!--								<button href="#" class="btn btn-primary">Get theme</button>-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+
+<!--			<a id="down-icon" class="down-icon smoothScroll" href="#history">-->
+<!--				<img class="down-arrow" src="img/svg/down_icon.svg" alt="Down arrow">-->
+<!--			</a>-->
+
+<!--		</section>-->
+
+<section class="notice">
+  <div class="page-title">
+        <div class="container">
+            <h3>게시판</h3>
+        </div>
+    </div>
+
+    <!-- board seach area -->
+    <div id="board-search">
+        <div class="container">
+            <div class="search-window">
+                <form action="">
+                    <div class="search-wrap">
+                        <label for="search" class="blind">게시판 내용 검색</label>
+                        <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
+                        <button type="submit" class="btn btn-dark">검색</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+  <!-- board list area -->
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                <tr>
+                    <th scope="col" class="th-num">번호</th>
+                    <th scope="col" class="th-title">제목</th>
+                    <th scope="col" class="th-date">등록일</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>3</td>
+                    <th>
+                      <a href="#!">[게시판] 개인정보 처리방침 변경안내처리방침</a>
+                      <p>테스트</p>
+                    </th>
+                    <td>2017.07.13</td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <th><a href="#!">게시판 안내입니다. 이용해주셔서 감사합니다</a></th>
+                    <td>2017.06.15</td>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <th><a href="#!">게시판 안내입니다. 이용해주셔서 감사합니다</a></th>
+                    <td>2017.06.15</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+		<section id="history">
+			<!-- Section title -->
+			<h1 class="sr-only">History section</h1>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="history-content">
+							<h2 class="section-title">ㅋㅋㅋㅋㅋㅋ</h2>
+							<p>가나다람ㄴ안망압압ㅈㄷㅇㅈ버ㅏㅇㅁ너ㅣㅏㅇㅁ낭라ㅓㅠㅏㄷㅈㄹㅈ어ㅏㅗㄴ오마놈낟</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+<!--		<section id="portfolio">-->
+<!--			&lt;!&ndash; Section title &ndash;&gt;-->
+<!--			<h1 class="sr-only">Portfolio section</h1>-->
+<!--			<div class="slider-container">-->
+<!--				<figure class="project grabbable">-->
+<!--					<img class="img-responsive" src="img/portfolio/01.jpg" alt="Project Image">-->
+<!--					<div class="description">-->
+<!--						<figcaption><h5>Random artwork</h5></figcaption>-->
+<!--						<p>Vivamus suscipit tortor eget felis porttitor-->
+<!--						volutpat. Vestibulum ac diam sit amet-->
+<!--						quam vehicula elementum sed sit amet dui.-->
+<!--						Pellentesque in ipsum id orci. </p>-->
+<!--						<ul class="social-list">-->
+<!--							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
+<!--							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+<!--						</ul>-->
+<!--					</div>-->
+<!--				</figure>-->
+
+<!--				<figure class="project grabbable">-->
+<!--					<img class="img-responsive" src="img/portfolio/02.jpg" alt="Project Image">-->
+<!--					<div class="description">-->
+<!--						<figcaption><h5>Random artwork</h5></figcaption>-->
+<!--						<p>Vivamus suscipit tortor eget felis porttitor-->
+<!--						volutpat. Vestibulum ac diam sit amet-->
+<!--						quam vehicula elementum sed sit amet dui.-->
+<!--						Pellentesque in ipsum id orci. </p>-->
+<!--						<ul class="social-list">-->
+<!--							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
+<!--							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+<!--						</ul>-->
+<!--					</div>-->
+<!--				</figure>-->
+
+<!--				<figure class="project grabbable">-->
+<!--					<img class="img-responsive" src="img/portfolio/03.jpg" alt="Project Image">-->
+<!--					<div class="description">-->
+<!--						<figcaption><h5>Random artwork</h5></figcaption>-->
+<!--						<p>Vivamus suscipit tortor eget felis porttitor-->
+<!--						volutpat. Vestibulum ac diam sit amet-->
+<!--						quam vehicula elementum sed sit amet dui.-->
+<!--						Pellentesque in ipsum id orci. </p>-->
+<!--						<ul class="social-list">-->
+<!--							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
+<!--							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+<!--						</ul>-->
+<!--					</div>-->
+<!--				</figure>-->
+
+<!--				<figure class="project grabbable">-->
+<!--					<img class="img-responsive" src="img/portfolio/04.jpg" alt="Project Image">-->
+<!--					<div class="description">-->
+<!--						<figcaption><h5>Random artwork</h5></figcaption>-->
+<!--						<p>Vivamus suscipit tortor eget felis porttitor-->
+<!--						volutpat. Vestibulum ac diam sit amet-->
+<!--						quam vehicula elementum sed sit amet dui.-->
+<!--						Pellentesque in ipsum id orci. </p>-->
+<!--						<ul class="social-list">-->
+<!--							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
+<!--							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+<!--						</ul>-->
+<!--					</div>-->
+<!--				</figure>-->
+
+<!--				<figure class="project grabbable">-->
+<!--					<img class="img-responsive" src="img/portfolio/05.jpg" alt="Project Image">-->
+<!--					<div class="description">-->
+<!--						<figcaption><h5>Random artwork</h5></figcaption>-->
+<!--						<p>Vivamus suscipit tortor eget felis porttitor-->
+<!--						volutpat. Vestibulum ac diam sit amet-->
+<!--						quam vehicula elementum sed sit amet dui.-->
+<!--						Pellentesque in ipsum id orci. </p>-->
+<!--						<ul class="social-list">-->
+<!--							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
+<!--							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+<!--						</ul>-->
+<!--					</div>-->
+<!--				</figure>-->
+
+<!--				<figure class="project grabbable">-->
+<!--					<img class="img-responsive" src="img/portfolio/06.jpg" alt="Project Image">-->
+<!--					<div class="description">-->
+<!--						<figcaption><h5>Random artwork</h5></figcaption>-->
+<!--						<p>Vivamus suscipit tortor eget felis porttitor-->
+<!--						volutpat. Vestibulum ac diam sit amet-->
+<!--						quam vehicula elementum sed sit amet dui.-->
+<!--						Pellentesque in ipsum id orci. </p>-->
+<!--						<ul class="social-list">-->
+<!--							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
+<!--							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+<!--						</ul>-->
+<!--					</div>-->
+<!--				</figure>-->
+<!--			</div>-->
+<!--		</section>-->
+
+<!--		<section id="services">-->
+<!--			&lt;!&ndash; Section title &ndash;&gt;-->
+<!--			<h1 class="sr-only">Services section</h1>-->
+<!--			<div class="container">-->
+<!--				<div class="row">-->
+<!--					<div class="col-md-4">-->
+<!--						<div class="service">-->
+<!--							<figure>-->
+<!--								<img src="img/svg/services/idea.svg" alt="Idea image">-->
+<!--								<div class="separator"></div>-->
+<!--								<figcaption><h5>Idea</h5></figcaption>-->
+<!--							</figure>-->
+<!--							<p>Vivamus suscipit tortor eget felis porttitor -->
+<!--							volutpat. Vestibulum ac diam sit amet -->
+<!--							quam vehicula elementum sed sit amet dui. -->
+<!--							Pellentesque in ipsum id orci. </p>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="col-md-4">-->
+<!--						<div class="service">-->
+<!--							<figure>-->
+<!--								<img src="img/svg/services/work.svg" alt="Work image">-->
+<!--								<div class="separator"></div>-->
+<!--								<figcaption><h5>Work</h5></figcaption>-->
+<!--							</figure>-->
+<!--							<p>Vivamus suscipit tortor eget felis porttitor -->
+<!--							volutpat. Vestibulum ac diam sit amet -->
+<!--							quam vehicula elementum sed sit amet dui. -->
+<!--							Pellentesque in ipsum id orci. </p>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="col-md-4">-->
+<!--						<div class="service">-->
+<!--							<figure>-->
+<!--								<img src="img/svg/services/deliver.svg" alt="Deliver image">-->
+<!--								<div class="separator"></div>-->
+<!--								<figcaption><h5>Deliver</h5></figcaption>-->
+<!--							</figure>-->
+<!--							<p>Vivamus suscipit tortor eget felis porttitor -->
+<!--							volutpat. Vestibulum ac diam sit amet -->
+<!--							quam vehicula elementum sed sit amet dui. -->
+<!--							Pellentesque in ipsum id orci. </p>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</section>-->
+
+<!--		<section id="clients">-->
+<!--			&lt;!&ndash; Section title &ndash;&gt;-->
+<!--			<h1 class="sr-only">Clients section</h1>-->
+<!--			<div class="container">-->
+<!--				<div class="row">-->
+<!--					<div class="col-md-8 col-md-offset-2">-->
+<!--						<div class="clients-content">-->
+<!--							<h2 class="section-title">Our clients are</h2>-->
+<!--							<blockquote>-->
+<!--								<p>“Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. -->
+<!--								Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus. Curabitur aliquet quam id dui posuere blandit”</p>-->
+<!--								<footer><cite title="Mr. Lorem Ipsum">Mr. Lorem Ipsum</cite></footer>-->
+<!--							</blockquote>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="clients-logs-container">-->
+<!--					<div class="row">-->
+<!--						<div class="col-sm-3">-->
+<!--							<div class="single-client-container">-->
+<!--								<img src="img/svg/clients/stephenson_web_design.svg" alt="Client logo image">-->
+<!--							</div>-->
+<!--						</div>-->
+
+<!--						<div class="col-sm-3">-->
+<!--							<div class="single-client-container">-->
+<!--								<img src="img/svg/clients/john_doe_design.svg" alt="Client logo image">-->
+<!--							</div>-->
+<!--						</div>-->
+
+<!--						<div class="col-sm-3">-->
+<!--							<div class="single-client-container">-->
+<!--								<img src="img/svg/clients/john_stephenson.svg" alt="Client logo image">-->
+<!--							</div>-->
+<!--						</div>-->
+
+<!--						<div class="col-sm-3">-->
+<!--							<div class="single-client-container">-->
+<!--								<img src="img/svg/clients/stephenson_william.svg" alt="Client logo image">-->
+<!--							</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</section>-->
+
+<!--		<section id="contact">-->
+<!--			&lt;!&ndash; Section title &ndash;&gt;-->
+<!--			<h1 class="sr-only">Contact section</h1>-->
+<!--			<div class="container">-->
+<!--				<div class="row">-->
+<!--					<div class="col-md-6">-->
+<!--						<div id="about-subsection" class="contact-subsection">-->
+<!--							<h2 class="sub-section-title">About us</h2>-->
+
+<!--							<p>Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum -->
+<!--							ac diam sit amet quam vehicula elementum sed sit amet dui. -->
+<!--							Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus. -->
+<!--							Curabitur aliquet quam id dui posuere blandit. Donec rutrum -->
+<!--							congue leo eget malesuada. Vivamus suscipit tortor eget -->
+<!--							felis porttitor volutpat. Vivamus suscipit tortor eget felis.</p>-->
+
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="col-md-6">-->
+<!--						<div id="form-subsection" class="contact-subsection">-->
+<!--							<h2 class="sub-section-title">Contact us</h2>-->
+<!--							<form>-->
+<!--								<div class="form-group">-->
+<!--									<label class="email-label" for="Email">Email</label>-->
+<!--									<input type="email" class="form-control" id="Email">-->
+<!--								</div>-->
+
+<!--								<div class="form-group">-->
+<!--								    <label class="message-label" for="Message">Message</label>-->
+<!--								  	<textarea class="form-control" id="Message" rows="2"></textarea>-->
+<!--								</div>-->
+<!--							  -->
+<!--							  	<button type="submit" class="btn btn-default pull-right">Send</button>-->
+<!--							</form>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</section>-->
+	</main>
+
+	<footer id="footer">
+		<h1 class="sr-only">Footer section</h1>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<small class="copyright">Made BY SH <i class="fa fa-love"></i>
+				</div>
+<!--				<div class="col-sm-6">-->
+<!--					<ul class="social-list">-->
+<!--						<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
+<!--						<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
+<!--						<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>-->
+<!--					</ul>-->
+<!--				</div>-->
+			</div>
+		</div>
+	</footer>
+	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/smooth-scroll.min.js"></script>
+	<script type="text/javascript" src="js/modernizr.mq.js"></script>
+	<script type="text/javascript" src="js/slick.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript Bootstrap-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- Custom JS -->
+	<script src="js/custom.js"></script>
+
+</body>
+</html>

@@ -306,6 +306,7 @@ HISTORY SECTION
 /**********************
 PORTFOLIO SECTION
 ***********************/
+/*
 
 .project {
 	position: relative;
@@ -343,9 +344,11 @@ PORTFOLIO SECTION
 	margin-top: 54px;
 }
 
+*/
 /**********************
 SERVICES SECTION
-***********************/
+***********************//*
+
 
 #services {
 	padding: 145px 0;
@@ -372,11 +375,12 @@ SERVICES SECTION
 .service p {
 	margin-top: 51px;
 }
+*/
 
 /**********************
 CLIENTS SECTION
 ***********************/
-
+/*
 #clients {
 	padding: 145px 0 150px;
 }
@@ -403,12 +407,12 @@ CLIENTS SECTION
 .clients-logs-container {
 	margin-top: 115px;
 	text-align: center;
-}
+}*/
 
 /**********************
 CONTACT SECTION
 ***********************/
-
+/*
 #contact {
 	background-color: #101012;
 	color: #ffffff;
@@ -498,7 +502,7 @@ CONTACT SECTION
 #form-subsection .btn-default:active:focus, 
 #form-subsection .btn-default:active:hover {
 	color: #ffffff;
-}
+}*/
 
 /**********************
 FOOTER SECTION

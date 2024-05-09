@@ -10,6 +10,15 @@ print('실행')
 
 @app.route("/")
 def home():
-    return render_template("main.html")
+    return render_template("index.html")
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/board")
+def board():
+    return render_template("board.html")
+
 if __name__=='__main__':
     app.run(host=HOST,port=PORT,threaded=DEBUG)

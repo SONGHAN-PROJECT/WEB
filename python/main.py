@@ -63,9 +63,6 @@ def board():
     logged_in = check_token()
     # index.html 템플릿 렌더링 시 로그인 상태 정보를 전달
     return render_template('board.html', logged_in=logged_in)
-@app.route("/signup")
-def signup():
-    return render_template("signup.html")
 
 if __name__=='__main__':
     app.run(host=HOST,port=PORT,threaded=DEBUG)

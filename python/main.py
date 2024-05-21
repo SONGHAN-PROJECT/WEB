@@ -27,7 +27,9 @@ google = oauth.remote_app(
     access_token_url='https://accounts.google.com/o/oauth2/token',
     authorize_url='https://localhost:8080/login/authorized',
 )
-
+@app.route("/index")
+def index():
+    return redirect(url_for('home'))
 @app.route("/")
 def home():
     logged_in = check_token()
@@ -74,9 +76,6 @@ def board():
     logged_in = check_token()
     # index.html 템플릿 렌더링 시 로그인 상태 정보를 전달
     return render_template('board.html', logged_in=logged_in)
-@app.route("/signup")
-def signup():
-    return render_template("signup.html")
 
 if __name__=='__main__':
     ssl_cert = 'C:/Users/82102/PycharmProjects/WEB/server.crt'

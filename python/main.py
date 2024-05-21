@@ -3,6 +3,8 @@ from flask_sslify import SSLify
 from flask import Flask, render_template, url_for, session, redirect, request
 from flask_oauthlib.client import OAuth
 
+from python.DB.models.article import Article
+
 app = Flask(__name__, template_folder='../web', static_folder='../web/static')
 sslify = SSLify(app)
 
@@ -74,8 +76,32 @@ def authorized():
 @app.route("/board")
 def board():
     logged_in = check_token()
-    # index.html 템플릿 렌더링 시 로그인 상태 정보를 전달
-    return render_template('board.html', logged_in=logged_in)
+    parameter_dict = request.args.to_dict()
+    page = 1
+    if "page" in parameter_dict.keys():
+        page = int(parameter_dict["page"])
+
+    if "search" in parameter_dict.keys():
+        search_value = parameter_dict["search"]
+        return render_template("board.html", posts=Article.search_article(search_value, page),
+                               search_value=search_value,
+                               page=page,
+                               max_page=Article.get_max_page(search_value))
+
+    else:
+        return render_template("board.html", posts=Article.get_all_article(page),
+                               search_value="",
+                               page=page,
+                               max_page=Article.get_max_page())
+@app.route("/article/<articleNo>")
+def article(articleNo):
+    return render_template("article.html", article=Article.load_article_with_post_id(articleNo))
+
+@app.route("/articles")
+def articles():
+    return {"articles": Article.load_all_article()}
+
+
 
 if __name__=='__main__':
     ssl_cert = 'C:/Users/82102/PycharmProjects/WEB/server.crt'

@@ -34,7 +34,15 @@
         var loginButton = document.getElementById('loginButton');
 
         loginButton.addEventListener('click', function() {
-            firebase.auth().signInWithRedirect(provider);
+        	if (loginButton.innerText === "로그인"){
+            	firebase.auth().signInWithRedirect(provider);
+            	window.location.href = "/login"
+            	document.getElementById("loginButton").innerText = "로그아웃";
+            }
+            else{
+            	window.location.href = "/logout"
+            	document.getElementById("loginButton").innerText = "로그인";
+            }
         });
       };
     </script>
@@ -63,15 +71,7 @@
 		    <div class="collapse navbar-collapse" id="main-navbar">
 		      <ul class="nav navbar-nav navbar-right">
 				  <li class="active"><a class="smoothScroll" href="/board">게시판 <span class="sr-only">(current)</span></a></li>
-				  <li><a class="smoothScroll" href="/login" id="loginButton">로그인</a></li>
-				  <script>
-        				// 서버에서 받은 로그인 상태 정보를 확인
-        				var loggedIn = {{ logged_in | tojson }};
-        				// 만약 로그인 상태가 true이면, 로그인 버튼을 숨김
-        				if (loggedIn) {
-            				document.getElementById('loginButton').style.display = "none";
-        				}
-				  </script>
+				  <li><a class="smoothScroll" id="loginButton">로그인</a></li>
 				  <li><a class="smoothScroll" href="/signup">회원가입</a></li>
 <!--		        <li><a class="smoothScroll" href="#clients">Clients</a></li>-->
 <!--		        <li><a class="smoothScroll" href="#contact">Contact</a></li>-->

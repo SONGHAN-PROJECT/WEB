@@ -26,7 +26,9 @@ google = oauth.remote_app(
     access_token_url='https://accounts.google.com/o/oauth2/token',
     authorize_url='https://accounts.google.com/o/oauth2/auth',
 )
-
+@app.route("/index")
+def index():
+    return redirect(url_for('home'))
 @app.route("/")
 def home():
     logged_in = check_token()

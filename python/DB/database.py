@@ -6,8 +6,8 @@ from mysql.connector import pooling
 dbconfig = {
     "host": '203.250.133.105',
     "user": "root",
-    "password": "ABC1301!",
-    "database": "capstone"
+    "password": "Abc1301!",
+    "database": "sh"
 }
 
 pool = pooling.MySQLConnectionPool(

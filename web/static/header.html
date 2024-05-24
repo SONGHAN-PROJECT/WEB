@@ -1,0 +1,38 @@
+	<header id="header">
+		<!-- Section title -->
+		<h1 class="sr-only"> Home page</h1>
+		<nav class="navbar navbar-default navbar-fixed-top">
+		  <!-- Section title -->
+		  <h1 class="sr-only">Main navigation</h1>
+		  <div class="container">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+				<a class="navbar-brand smoothScroll" href="/">
+                   <h2 class="h1" style="color: skyblue;">SH</h2>
+		      <!--  <img alt="Modus" src="static/img/logo.png">-->
+		      </a>
+		    </div>
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="main-navbar">
+		      <ul class="nav navbar-nav navbar-right">
+				  <li class="active"><a class="smoothScroll" href="/board">게시판 <span class="sr-only">(current)</span></a></li>
+				  <li><a class="smoothScroll" href="/login" id="loginButton">로그인</a></li>
+				  <script>
+        				// 서버에서 받은 로그인 상태 정보를 확인
+        				var loggedIn = {{ logged_in | tojson }};
+        				// 만약 로그인 상태가 true이면, 로그인 버튼을 숨김
+        				if (loggedIn) {
+            				document.getElementById('loginButton').style.display = "none";
+        				}
+				  </script>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container -->
+		</nav>
+	</header>

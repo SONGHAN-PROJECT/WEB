@@ -22,48 +22,7 @@
 </head>
 <body>
 
-	<header id="header">
-		<!-- Section title -->
-		<h1 class="sr-only"> Home page</h1>
-		<nav class="navbar navbar-default navbar-fixed-top">
-		  <!-- Section title -->
-		  <h1 class="sr-only">Main navigation</h1>
-		  <div class="container">
-		    <!-- Brand and toggle get grouped for better mobile display -->
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand smoothScroll" href="/index">
-                   <h2 class="h1" style="color: skyblue;">SH</h2>
-		      <!--  <img alt="Modus" src="static/img/logo.png">-->
-		      </a>
-		    </div>
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="main-navbar">
-		      <ul class="nav navbar-nav navbar-right">
-				  <li class="active"><a class="smoothScroll" href="/board">게시판 <span class="sr-only">(current)</span></a></li>
-				  <li><a class="smoothScroll" href="/login" id="loginButton">로그인</a></li>
-                  <script>
-        				// 서버에서 받은 로그인 상태 정보를 확인
-        				var loggedIn = {{ logged_in | tojson }};
-        				// 만약 로그인 상태가 true이면, 로그인 버튼을 숨김
-        				if (loggedIn) {
-            				document.getElementById('loginButton').style.display = "none";
-        				}
-				  </script>
-				  <li><a class="smoothScroll" href="/signup">회원가입</a></li>
-<!--		        <li><a class="smoothScroll" href="#clients">Clients</a></li>-->
-<!--		        <li><a class="smoothScroll" href="#contact">Contact</a></li>-->
-		      </ul>
-		    </div><!-- /.navbar-collapse -->
-		  </div><!-- /.container -->
-		</nav>
-	</header>
-
+{% include url_for('static', filename='header.html') %}
 	<main class="th-layout-main">
       <!-- [S]basic-N6 -->
       <section class="notice">
@@ -137,7 +96,7 @@
           <div class="button-container">
             <div class="button-area">
               <a
-                href="{{'/upload' if current_user.is_authenticated else '/login'}}"
+                href="{{'/upload' if logged_in else '/login'}}"
                 style="color: white"
                 ><button class="btn btn-dark article-btn">
                   글 작성하기
@@ -149,25 +108,7 @@
       </section>
       <!-- [E]basic-N6 -->
     </main>
-
-	<footer id="footer">
-		<h1 class="sr-only">Footer section</h1>
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6">
-                    <small class="copyright">Made BY SH <i class="fa fa-love"></i></small>
-				</div>
-<!--				<div class="col-sm-6">-->
-<!--					<ul class="social-list">-->
-<!--						<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>-->
-<!--						<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>-->
-<!--						<li><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>-->
-<!--					</ul>-->
-<!--				</div>-->
-
-			</div>
-		</div>
-	</footer>
+{% include url_for('static', filename='footer.html') %}
 	<!-- Scripts -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/smooth-scroll.min.js"></script>

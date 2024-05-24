@@ -85,13 +85,24 @@ def board():
         return render_template("board.html", posts=Article.search_article(search_value, page),
                                search_value=search_value,
                                page=page,
-                               max_page=Article.get_max_page(search_value))
+                               max_page=Article.get_max_page(search_value),
+                               logged_in=logged_in)
 
     else:
-        return render_template("board.html", posts=Article.get_all_article(page),
-                               search_value="",
-                               page=page,
-                               max_page=Article.get_max_page())
+        # get_all_article 메서드 호출
+        articles = Article.get_all_article(page)
+        if articles is None:
+            articles = []
+
+        # get_max_page 메서드 호출
+        max_page = Article.get_max_page(search_value="", count=15)
+        if max_page is None:
+            max_page = 0
+
+        # render_template 호출
+        return render_template("board.html", posts=articles, search_value="", page=0, max_page=max_page, logged_in=logged_in)
+
+
 @app.route("/article/<articleNo>")
 def article(articleNo):
     return render_template("article.html", article=Article.load_article_with_post_id(articleNo))
@@ -103,6 +114,6 @@ def articles():
 
 
 if __name__=='__main__':
-    ssl_cert = 'C:/Users/82102/PycharmProjects/WEB/server.crt'
-    ssl_key = 'C:/Users/82102/PycharmProjects/WEB/server.key'
+    ssl_cert = 'C:\pycharm\WEB\web\server.crt'
+    ssl_key = 'C:\pycharm\WEB\web\server.key'
     app.run(host=HOST,port=PORT,threaded=DEBUG)

@@ -4,7 +4,7 @@ from mysql.connector import pooling
 
 # Connection pool 생성
 dbconfig = {
-    "host": '203.250.133.105',
+    "host": 'localhost',
     "user": "root",
     "password": "Abc1301!",
     "database": "sh",

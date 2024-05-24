@@ -6,7 +6,6 @@ from flask_oauthlib.client import OAuth
 from python.DB.models.article import Article
 
 app = Flask(__name__, template_folder='../web', static_folder='../web/static')
-sslify = SSLify(app)
 
 HOST = 'localhost'
 PORT = 8080
@@ -26,8 +25,8 @@ google = oauth.remote_app(
     base_url='https://www.googleapis.com/oauth2/v1/',
     request_token_url=None,
     access_token_method='POST',
-    access_token_url='https://accounts.google.com/o/oauth2/token',
-    authorize_url='https://localhost:8080/login/authorized',
+    access_token_url='http://accounts.google.com/o/oauth2/token',
+    authorize_url='http://localhost:8080/login/authorized',
 )
 @app.route("/index")
 def index():
@@ -106,4 +105,4 @@ def articles():
 if __name__=='__main__':
     ssl_cert = 'C:/Users/82102/PycharmProjects/WEB/server.crt'
     ssl_key = 'C:/Users/82102/PycharmProjects/WEB/server.key'
-    app.run(host=HOST,port=PORT,threaded=DEBUG,ssl_context=(ssl_cert, ssl_key))
+    app.run(host=HOST,port=PORT,threaded=DEBUG)

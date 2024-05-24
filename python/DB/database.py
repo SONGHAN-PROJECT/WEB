@@ -7,7 +7,8 @@ dbconfig = {
     "host": '203.250.133.105',
     "user": "root",
     "password": "Abc1301!",
-    "database": "sh"
+    "database": "sh",
+    "port": 3306
 }
 
 pool = pooling.MySQLConnectionPool(

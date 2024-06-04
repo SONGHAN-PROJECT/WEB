@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SH</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free singlepage web template created by GraphBerry">
+    <meta name="keywords" content="HTML5, Bootstrap 3, CSS3, javascript, PHP, Responsive, Mobile">
+    <meta name="author" content="GraphBerry.com"/>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/article.css">
+
+</head>
+ <body>
+    <!-- [S]basic-N1 -->
+    {% include url_for('static', filename='header.html') %}
+    <main>
+      <div class="article-container">
+        <div class="article-box">
+          <div class="article-header">
+            <h2 class="title">{{article["title"]}}</h2>
+          </div>
+          <div class="article-main">
+            <div class="content">{{article["description"]}}</div>
+          </div>
+          <div class="article-footer">
+            <div>작성자 {{article["username"]}}</div>
+            <div>작성 시간 {{article["created_at"]}}</div>
+            <div class="button-area">
+              <button
+                type="button"
+                class="btn delete-btn"
+                onClick="deleteRequest(event)">글 삭제하기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+        {% include url_for('static', filename='footer.html') %}
+    <script>
+      const deleteRequest = (event) => {
+        fetch("http://localhost:8080/delete/{{article['post_id']}}", {
+          method: "POST",
+        })
+          .then((response) => {
+            var message = "";
+            var url = "";
+            switch (response.status) {
+              case 200:
+                message = "글을 성공적으로 제거하였습니다";
+                url = "/board";
+                break;
+
+              case 401:
+                message = "사용자 정보와 일치하지 않습니다";
+                url = location.href;
+                break;
+
+              case 403:
+                message = "로그인을 먼저 해주세요";
+                url = "/login";
+                break;
+
+              case 500:
+                message = "서버 내부 에러가 발생하였습니다";
+                url = location.href;
+                break;
+
+              default:
+                message = "클라이언트 오류가 발생하였습니다";
+                url = location.href;
+                break;
+            }
+            alert(message);
+            location.href = url;
+          })
+          .catch((err) => {
+            document.write(`에러 메세지 ${err}`);
+          });
+
+      };
+    </script>
+   	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/smooth-scroll.min.js"></script>
+	<script type="text/javascript" src="js/modernizr.mq.js"></script>
+	<script type="text/javascript" src="js/slick.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript Bootstrap-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- Custom JS -->
+	<script src="js/custom.js"></script>
+
+  </body>
+</html>

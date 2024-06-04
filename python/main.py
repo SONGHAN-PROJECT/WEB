@@ -81,6 +81,10 @@ def logout():
 def register():
     return render_template("register.html")
 
+@app.route("/chat")
+def chat():
+    return render_template("chat.html")
+
 @app.route("/register", methods=['POST', 'GET'])
 def do_reg():
     return get_register()

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>SH</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free singlepage web template created by GraphBerry">
+    <meta name="keywords" content="HTML5, Bootstrap 3, CSS3, javascript, PHP, Responsive, Mobile">
+    <meta name="author" content="GraphBerry.com"/>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+
+   .chat-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: auto; /* 수직 스크롤이 필요한 경우 표시 */
+    height: 80vh; /* 화면 높이의 80%로 설정 */
+}
+
+    .chat-box {
+        padding: 20px;
+        height: 580px; /* Adjusted height to accommodate buttons */
+        overflow-y: scroll;
+    }
+
+
+    .message {
+        border-radius: 5px;
+        padding: 10px 15px;
+        margin: 5px 0;
+        max-width: 100%;
+    }
+
+    .user-message {
+        background-color: #007bff;
+        color: #fff;
+        align-self: flex-end;
+    }
+
+    .bot-message {
+        background-color: #e9ecef;
+        color: #333;
+        align-self: flex-start;
+    }
+
+    .input-box {
+        width: calc(100% - 40px);
+        padding: 10px 20px;
+        border: 1px solid #ccc;
+        border-radius: 20px; /* Adjusted border-radius */
+        margin: 10px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        margin: 5px;
+        cursor: pointer;
+        float: left; /* Floating the buttons to make them appear in the same line */
+    }
+
+    span {
+        font-weight: bold;
+    }
+</style>
+<body>
+{% include url_for('static', filename='header.html') %}
+<main>
+    <br><br><br><br>
+
+<div class="chat-container">
+    <div class="chat-box" id="chatBox">
+
+    </div>
+    <hr>
+    <div class="input-box">
+        <!-- Add buttons for different amounts -->
+        <button onclick="addAmount(1000)">1000원</button>
+        <button onclick="addAmount(10000)">10000원</button>
+        <button onclick="addAmount(100000)">100000원</button>
+        <div style="clear: both;"></div> <!-- Clearing the float -->
+    </div>
+</div>
+</main>
+{% include url_for('static', filename='footer.html') %}
+<script>
+    var totalAmount = 0; // Variable to store the total amount
+
+    function addAmount(amount) {
+        // Add the amount to the total
+        totalAmount += amount;
+
+        // Create a new message element
+        var messageElement = document.createElement('div');
+        messageElement.classList.add('message', 'user-message');
+        messageElement.innerText = "사용자가 " + amount + "원을 입력했습니다. 현재 총액: " + totalAmount + "원";
+
+        // Add the message to the chat box
+        var chatBox = document.getElementById('chatBox');
+        chatBox.appendChild(messageElement);
+
+        // Scroll to the bottom of the chat box
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
+
+	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/smooth-scroll.min.js"></script>
+	<script type="text/javascript" src="js/modernizr.mq.js"></script>
+	<script type="text/javascript" src="js/slick.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript Bootstrap-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!-- Custom JS -->
+	<script src="js/custom.js"></script>
+</body>
+</html>

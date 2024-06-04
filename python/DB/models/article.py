@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from datetime import datetime
 from python.DB.database import get_connection
 from python.DB.models.user import User
@@ -7,21 +8,23 @@ import logging
 import traceback
 
 class Article:
-    def __init__(self, post_id: int, title: str, content: str, description:str ,image:str):
+    def __init__(self, post_id: int, title: str, start_time: time, description:str):
         self.id = post_id
         self.title = title
-        self.content = content
+        self.start_time = start_time
         self.description = description
-        self.image_url = image
+        # self.image_url = image
+        # self.user_id = user_id
 
     @property
-    def convert_json(result):
+    def convert_json(self):
         return {
-            "id": result.post_id,
-            "title": result.title,
-            "start_time": result.content,
-            "description": result.description,
-            "image_url": result.image
+            "id": self.id,
+            "title": self.title,
+            "start_time": self.start_time,
+            "description": self.description
+            # "image_url": self.image,
+            # "user_id": self.user_id
         }
 
     @staticmethod
@@ -31,8 +34,7 @@ class Article:
         try:
             cursor.execute(f"""
                 SELECT * FROM border
-                WHERE id BETWEEN {(page - 1) * count + 1} AND {page * count + 1}
-                ORDER BY id ASC;
+                ORDER BY start_time DESC;
             """)
 
             results = cursor.fetchall()
@@ -41,6 +43,7 @@ class Article:
             return list(map(lambda x: {
                 "id": x[0],
                 "title": x[1],
+                "time": x[2]
             }, results))
 
         except Exception as e:
@@ -109,19 +112,20 @@ class Article:
             exit(1)
 
     @staticmethod
-    def insert_article(title: str, content: str, user_id: int):
+    def insert_article(title: str, description: str):
         try:
+            print(title+" "+description)
             conn = get_connection()
             cursor = conn.cursor()
+            print('db업로드')
             cursor.execute(f"""
-                INSERT INTO border(title, id) VALUES ('{title}', {user_id});
-            """)
+                INSERT INTO border(title, description) VALUES ('{title}','{description}');
+             """)
             results = cursor.fetchall()
             conn.commit()
             cursor.close()
             conn.close()
-            return len(results) is not None
+            return 200
 
         except Exception as e:
-            logging.error(f"{e}: {''.join(traceback.format_exception(None, e, e.__traceback__))}")
-            exit(1)
+            print("MySQL에서 에러가 발생했습니다:", e)

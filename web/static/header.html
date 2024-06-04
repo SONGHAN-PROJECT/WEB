@@ -18,19 +18,19 @@
 		      <!--  <img alt="Modus" src="static/img/logo.png">-->
 		      </a>
 		    </div>
-		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <!-- Collect the nav links, forms, and other cntent for toggling -->
 		    <div class="collapse navbar-collapse" id="main-navbar">
 		      <ul class="nav navbar-nav navbar-right">
 				  <li class="active"><a class="smoothScroll" href="/board">게시판 <span class="sr-only">(current)</span></a></li>
-				  <li><a class="smoothScroll" href="/login" id="loginButton">로그인</a></li>
-				  <script>
-        				// 서버에서 받은 로그인 상태 정보를 확인
-        				var loggedIn = {{ logged_in | tojson }};
-        				// 만약 로그인 상태가 true이면, 로그인 버튼을 숨김
-        				if (loggedIn) {
-            				document.getElementById('loginButton').style.display = "none";
-        				}
-				  </script>
+				  <li class="active">
+					{% if current_user.is_authenticated %}
+					<!--로그인한 경우 -->
+					<a href="{{ url_for('logout') }}">로그아웃</a>
+					{% else %}
+					<!-- 로그인하지 않은 경우 -->
+					<a href="{{ url_for('login') }}">로그인</a>
+					{% endif %}
+          		</li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container -->

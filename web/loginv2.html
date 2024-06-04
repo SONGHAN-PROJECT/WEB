@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<style>
+  @import url("static/css/logcs.css");
+</style>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>도도돋도돋</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <header class="basic-N1" data-bid="WiLOy3e50y">
+      <div class="header-inner">
+        <div class="header-container container-lg">
+          <a href="{{ url_for('home') }}">
+            <h8 class="header-title">
+              <img src="{{ url_for('static', filename='images/logo3.png') }}" alt="로고" />
+            </h8>
+          </a>
+          <div class="header-right">
+            <div class="header-lang">
+              <button class="header-langbtn">
+                <a href="{{ url_for('home') }}">돌아가기</a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+        <div class="content">
+          <div class="container">
+            <div class="sign-up-container">
+              <form>
+                <h1>Create Account</h1>
+                <span>or use your email for registration</span>
+                <input type="text" placeholder="Name">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
+                <button class="form_btn">Sign Up</button>
+              </form>
+            </div>
+            <div class="sign-in-container">
+              <form id='login' name="login">
+                <h1>Sign In</h1>
+                <span></span>
+                <input type="id" placeholder="id" id="id" name="id">
+                <input type="password" placeholder="Password" id="password" name="password">
+                <button class="form_btn" onclick='performLogin(event)'>Sign In</button>
+                <script>
+                  function performLogin(event) {
+                    event.preventDefault();
+                    // 로그인에 사용할 데이터
+                    const loginData = new FormData(document.getElementById('login'));
+
+                    // 서버로 데이터를 전송하는 AJAX 요청
+                    fetch("{{ url_for('login_auth') }}", {
+                        method: 'POST',
+                        body: loginData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // 서버 응답에 따라 처리
+                        if (data.login_success) {
+                            alert('로그인이 성공했습니다.');
+                            location.href = "{{ url_for('home') }}";
+                        } else {
+                            alert('로그인이 실패했습니다.');
+                            location.href = "{{ url_for('login') }}";
+                        }
+                    })
+                    .catch(error=>{
+                      console.log('에러:', error);
+                      alert('로그인이 실패했습니다.');
+                    });
+                }
+               </script>
+               </form>
+            </div>
+            <div class="overlay-container">
+              <div class="overlay-left">
+                <h1>Welcome Back</h1>
+                <p>To keep connected with us please login with your personal info</p>
+                <button id="signIn" class="overlay_btn">Sign In </button>
+              </div>
+              <div class="overlay-right">
+                <h1>Sign Up</h1>
+                <p>회원가입을 통해 게시판을 이용해보세요</p>
+                <a href="{{ url_for('register') }}"/>
+                <button id="signUp" class="overlay_btn">Sign Up</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+    </main>
+  </body>
+</html>

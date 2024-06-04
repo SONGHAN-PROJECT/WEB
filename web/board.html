@@ -21,7 +21,6 @@
 	<link rel="stylesheet" type="text/css" href="static/css/board.css">
 </head>
 <body>
-
 {% include url_for('static', filename='header.html') %}
 	<main class="th-layout-main">
       <!-- [S]basic-N6 -->
@@ -70,14 +69,14 @@
 
                 <tr
                   class="table-row"
-                  onclick="location.href='/article/' + {{post['post_id']}}"
+                  onclick="location.href='/article/' + {{post['id']}}"
                 >
-                  <td>{{post["post_id"]}}</td>
+                  <td>{{post["id"]}}</td>
                   <td>{{post["title"]}}</td>
-                  <td>{{post["username"]}}</td>
-                  <td>{{post["created_at"]}}</td>
+                  <td>작성자</td>
+                  <td>{{post["time"]}}</td>
                 </tr>
-
+                </tr>
 
                 {% endfor %}
               </tbody>
@@ -95,13 +94,9 @@
           </div>
           <div class="button-container">
             <div class="button-area">
-              <a
-                href="{{'/upload' if logged_in else '/login'}}"
-                style="color: white"
-                ><button class="btn btn-dark article-btn">
-                  글 작성하기
-                </button></a
-              >
+              <a href="/upload" style="color: white">
+                  <button class="btn btn-dark article-btn">글 작성하기</button></a>
+
             </div>
           </div>
         </div>

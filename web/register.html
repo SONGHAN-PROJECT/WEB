@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<style>
+  @import url("static/css/register.css");
+</style>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>도도돋도돋</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/template.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <header class="basic-N1" data-bid="WiLOy3e50y">
+      <div class="header-inner">
+        <div class="header-container container-lg">
+          <a href="{{ url_for('home') }}">
+            <h8 class="header-title">
+              <img src="{{ url_for('static', filename='images/logo3.png') }}" alt="로고" />
+            </h8>
+          </a>
+          <div class="header-right">
+            <div class="header-lang">
+              <button class="header-langbtn">
+                <a href="{{ url_for('login') }}">돌아가기</a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+        <div class="content">
+          <div class="container">
+            <div class="sign-in-container">
+              <form id='register' name="register">
+                <h1>Sign Up</h1>
+                <span>Create your account</span>
+                <input type="id" placeholder="id" name="reg_id">
+                <input type="password" placeholder="password" name="reg_password">
+                <input type="email" placeholder="email" name="reg_email">
+                <button class="form_btn" onclick='performRegister(event)'>Register</button>
+                <script>
+                  function performRegister(event) {
+                    event.preventDefault();
+                    const RegisterData = new FormData(document.getElementById('register'));
+
+                    // 서버로 데이터를 전송하는 AJAX 요청
+                    fetch("{{ url_for('register') }}", {
+                        method: 'POST',
+                        body: RegisterData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                      // 서버 응답에 따라 처리
+                      alert(data.register_message);
+                      if (data.register_type == 1) {
+                        location.href = "{{ url_for('login') }}";
+                      } else if (data.register_type == 2) {
+                        location.href = "{{ url_for('register') }}";
+                      }
+                    })
+                    .catch(error=>{
+                      console.log('에러:' + error);
+                      alert('오류가 발생했습니다.');
+                    });
+                }
+               </script>
+               </form>
+            </div>
+          </div>
+        </div>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+      <li class="box">⬢</li>
+    </main>
+  </body>
+</html>
+
+
+
+
+

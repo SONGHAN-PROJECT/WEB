@@ -22,23 +22,23 @@
 </head>
 <body>
 {% include url_for('static', filename='header.html') %}
-	<script src="https://www.gstatic.com/firebasejs/8.0/firebase.js"></script>
-	<script src="./js/googlelogin.js"></script>
-	<script>
-	  var provider = new firebase.auth.GoogleAuthProvider();
-      var config = {
-        apiKey: "AIzaSyAEsYcJYm05VF9SwJIJYGPPwqhD3yRYiZM",
-        authDomain: "graduationproject-422807.firebaseapp.com",
-      };
-      firebase.initializeApp(config);
-	  window.onload = function() {
-        var loginButton = document.getElementById('loginButton');
+<!--	<script src="https://www.gstatic.com/firebasejs/8.0/firebase.js"></script>-->
+<!--	<script src="./js/googlelogin.js"></script>-->
+<!--	<script>-->
+<!--	  var provider = new firebase.auth.GoogleAuthProvider();-->
+<!--      var config = {-->
+<!--        apiKey: "AIzaSyAEsYcJYm05VF9SwJIJYGPPwqhD3yRYiZM",-->
+<!--        authDomain: "graduationproject-422807.firebaseapp.com",-->
+<!--      };-->
+<!--      firebase.initializeApp(config);-->
+<!--	  window.onload = function() {-->
+<!--        var loginButton = document.getElementById('loginButton');-->
 
-        loginButton.addEventListener('click', function() {
-            firebase.auth().signInWithRedirect(provider);
-        });
-      };
-    </script>
+<!--        loginButton.addEventListener('click', function() {-->
+<!--            firebase.auth().signInWithRedirect(provider);-->
+<!--        });-->
+<!--      };-->
+<!--    </script>-->
 
 	<main>
 		<section id="home">

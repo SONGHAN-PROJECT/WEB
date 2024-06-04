@@ -1,0 +1,99 @@
+.header-langbtn > a {
+  color: black !important;
+}
+body {
+  background-color: rgb(17, 17, 17) !important;
+  overflow: hidden;
+}
+
+.box {
+  z-index:-1;
+  position: absolute;
+  background: transparent;
+  animation-name: animation;
+  animation-timing-function: ease infinite;
+  left: 100vw;
+}
+.box:nth-child(1) {
+  font-size: 15em;
+  color: rgb(34, 34, 34);
+  top: 350px;
+  animation-delay: 15s;
+  animation-duration: 45s;
+}
+
+.box:nth-child(2) {
+  font-size: 10em;
+  color: rgb(51, 51, 51);
+  top: 100px;
+  animation-delay: 1s;
+  animation-duration: 35s;
+}
+
+.box:nth-child(3) {
+  font-size: 35em;
+  color: rgb(26, 26, 26);
+  top: 45vw;
+  animation-delay: -2s;
+  animation-duration: 70s;
+}
+
+.box:nth-child(4) {
+  font-size: 20em;
+  color: rgb(26, 26, 26);
+  top: 200px;
+  animation-delay: 10s;
+  animation-duration: 45s;
+}
+
+.box:nth-child(5) {
+  font-size: 2em;
+  color: rgb(73, 73, 73);
+  top: 250px;
+  animation-delay: 5s;
+  animation-duration: 40s;
+}
+
+.box:nth-child(6) {
+  font-size: 3.5em;
+  color: rgb(34, 34, 34);
+  top: 350px;
+  animation-delay: -5s;
+  animation-duration: 55s;
+}
+
+.box:nth-child(7) {
+  font-size: 5em;
+  color: rgb(26, 26, 26);
+  top: 450px;
+  animation-delay: -7s;
+  animation-duration: 47s;
+}
+
+.box:nth-child(8) {
+  font-size: 20em;
+  color: rgb(34, 34, 34);
+  top: 80px;
+  animation-delay: -35s;
+  animation-duration: 70s;
+}
+
+.box:nth-child(9) {
+  font-size: 10em;
+  color: rgb(73, 73, 73);
+  top: 600px;
+  animation-delay: -20s;
+  animation-duration: 80s;
+}
+
+@keyframes animation {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    left: -300px;
+    transform: rotate(-360deg);
+  }
+}
+
+

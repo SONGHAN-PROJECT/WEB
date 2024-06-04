@@ -175,3 +175,20 @@ section.notice {
   width: 1px;
   height: 1px;
 }
+
+.pagination-container-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 20px 0; /* 필요에 따라 조정 */
+}
+
+.pagination-container {
+  flex-grow: 2; /* 페이지 번호 컨테이너가 2배 더 커짐 */
+  text-align: center;
+}
+
+.button-container {
+  margin-right: 400px;
+  flex-grow: 1; /* 버튼 컨테이너가 1배 크기로 설정 */
+  text-align: right; /* 버튼이 오른쪽 정렬 */
+}

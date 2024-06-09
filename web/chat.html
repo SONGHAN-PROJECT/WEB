@@ -14,9 +14,9 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
 
 </head>
 <style>
@@ -109,23 +109,39 @@
 </main>
 {% include url_for('static', filename='footer.html') %}
 <script>
-    var totalAmount = 0; // Variable to store the total amount
-
     function addAmount(amount) {
-        // Add the amount to the total
-        totalAmount += amount;
+        console.log('가격추가')
+        var postData = {
+            value: amount
+        };
+        fetch("http://203.250.133.111:8080/send_message/{{article['id']}}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            const new_amount=data.amount
+            console.log(new_amount)
+            var messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'user-message');
+            messageElement.innerText = "사용자가 " + amount + "원을 입력했습니다. 현재 총액: " + new_amount + "원";
+
+            // Add the message to the chat box
+            var chatBox = document.getElementById('chatBox');
+            chatBox.appendChild(messageElement);
+
+            // Scroll to the bottom of the chat box
+            chatBox.scrollTop = chatBox.scrollHeight;
+        })
+        .catch(error => {
+            // 네트워크 오류 처리
+            console.error('네트워크 오류:', error);
+        });
 
         // Create a new message element
-        var messageElement = document.createElement('div');
-        messageElement.classList.add('message', 'user-message');
-        messageElement.innerText = "사용자가 " + amount + "원을 입력했습니다. 현재 총액: " + totalAmount + "원";
-
-        // Add the message to the chat box
-        var chatBox = document.getElementById('chatBox');
-        chatBox.appendChild(messageElement);
-
-        // Scroll to the bottom of the chat box
-        chatBox.scrollTop = chatBox.scrollHeight;
     }
 </script>
 

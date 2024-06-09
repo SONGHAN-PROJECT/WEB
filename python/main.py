@@ -1,8 +1,10 @@
+import socket
+import sys
 from datetime import timedelta
 
 from flask_login import current_user, logout_user, login_manager, LoginManager
 from flask_sslify import SSLify
-from flask import Flask, render_template, url_for, session, redirect, request
+from flask import Flask, render_template, url_for, session, redirect, request, jsonify
 from flask_oauthlib.client import OAuth
 
 from python.DB.models.article import Article
@@ -12,9 +14,18 @@ from python.user.user import User
 
 app = Flask(__name__, template_folder='../web', static_folder='../web/static')
 
-HOST = 'localhost'
+HOST = '203.250.133.111'
 PORT = 8080
 DEBUG = True
+BUFF_SIZE=1024
+BACKLOG=5
+
+# conn_sock=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# conn_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+# conn_sock.setblocking(0)
+# conn_sock.bind((HOST,PORT))
+# conn_sock.listen(BACKLOG)
+# rd_list, wr_list, err_list = [sys.stdin, conn_sock],[],[]
 
 print('실행')
 login_manager = LoginManager()
@@ -42,6 +53,12 @@ def upload():
     return render_template("upload.html")
 # , logged_in=logged_in
 
+@app.route("/delete/<articleNo>", methods = ["POST"])
+def delete(articleNo):
+    print(articleNo)
+    article = Article.delete_article(articleNo)
+    return app.response_class(response={}, status = article)
+
 @app.route("/upload", methods=["POST"])
 def upload_request():
         formdata = request.form
@@ -49,10 +66,10 @@ def upload_request():
         title = formdata.get("title")
         start_time = formdata.get("start_time")
         description = formdata.get("description")
-        image = formdata.get("image")
+        image = request.files.get("image")
         user_id = formdata.get("user_id")
 
-        status = Article.insert_article(title, description)
+        status = Article.insert_article(title, description, image)
         return app.response_class(response={}, status=status)
 @app.route("/index")
 def index():
@@ -81,9 +98,16 @@ def logout():
 def register():
     return render_template("register.html")
 
-@app.route("/chat")
-def chat():
-    return render_template("chat.html")
+@app.route("/chat/<articleNo>")
+def chat(articleNo):
+    return render_template("chat.html",article=Article.load_article_with_post_id(articleNo))
+
+@app.route('/send_message/<articleNo>', methods=['POST'])
+def send_message(articleNo):
+    value = request.json["value"]
+    Article.add_amount(value, articleNo)
+    response_amount=Article.get_amount(articleNo)
+    return jsonify({'status': 'ok', 'amount': response_amount})
 
 @app.route("/register", methods=['POST', 'GET'])
 def do_reg():

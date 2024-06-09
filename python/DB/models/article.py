@@ -1,19 +1,25 @@
 from __future__ import annotations
 
+import os
 import time
 from datetime import datetime
+from email.mime import image
+
+from werkzeug.utils import secure_filename
+
 from python.DB.database import get_connection
 from python.DB.models.user import User
 import logging
 import traceback
 
 class Article:
-    def __init__(self, post_id: int, title: str, start_time: time, description:str):
+    def __init__(self, post_id: int, title: str, start_time: time, description:str, image:bytes, amount:int):
         self.id = post_id
         self.title = title
         self.start_time = start_time
         self.description = description
-        # self.image_url = image
+        self.image = image
+        self.amount = amount
         # self.user_id = user_id
 
     @property
@@ -22,8 +28,8 @@ class Article:
             "id": self.id,
             "title": self.title,
             "start_time": self.start_time,
-            "description": self.description
-            # "image_url": self.image,
+            "description": self.description,
+            "image": self.image
             # "user_id": self.user_id
         }
 
@@ -112,14 +118,30 @@ class Article:
             exit(1)
 
     @staticmethod
-    def insert_article(title: str, description: str):
+    def insert_article(title: str, description: str, image:bytes):
         try:
             print(title+" "+description)
+
+            image_path = None
+            if image:
+                # uploads 디렉토리 생성 (이미 있다면 건너뜀)
+                uploads_dir = 'uploads'
+                if not os.path.exists(uploads_dir):
+                    os.makedirs(uploads_dir)
+
+                # 이미지 파일 이름을 안전하게 만들기
+                image_filename = secure_filename(image.filename)
+                # 이미지를 업로드할 경로 생성
+                image_path = os.path.join(uploads_dir, image_filename)
+                # 이미지 저장
+                image.save(image_path)
+
             conn = get_connection()
             cursor = conn.cursor()
             print('db업로드')
+            print(image)
             cursor.execute(f"""
-                INSERT INTO border(title, description) VALUES ('{title}','{description}');
+                INSERT INTO border(title, description, image) VALUES ('{title}','{description}', '{image_path}');
              """)
             results = cursor.fetchall()
             conn.commit()
@@ -129,3 +151,62 @@ class Article:
 
         except Exception as e:
             print("MySQL에서 에러가 발생했습니다:", e)
+
+    @staticmethod
+    def delete_article(post_id: int):
+        try:
+            conn = get_connection()
+            cursor = conn.cursor()
+            cursor.execute(f"""
+                    DELETE FROM border WHERE id={post_id};
+                """)
+
+            results = cursor.fetchone()
+            conn.commit()
+            cursor.close()
+            conn.close()
+            if results is None:
+                return 200
+
+        except Exception as e:
+            logging.error(f"{e}: {''.join(traceback.format_exception(None, e, e.__traceback__))}")
+            return 500
+
+    def add_amount(am: int, post_id: int):
+        try:
+            conn = get_connection()
+            cursor = conn.cursor()
+            cursor.execute(f"""
+                    UPDATE border
+                    SET amount = amount + {am}
+                    WHERE id={post_id};
+                """)
+
+            results = cursor.fetchone()
+            conn.commit()
+            cursor.close()
+            conn.close()
+            if results is None:
+                return 200
+
+        except Exception as e:
+            logging.error(f"{e}: {''.join(traceback.format_exception(None, e, e.__traceback__))}")
+            return 500
+
+    def get_amount(post_id: int):
+        try:
+            conn = get_connection()
+            cursor = conn.cursor()
+            cursor.execute(f"""
+                    SELECT amount FROM border WHERE id={post_id};
+                """)
+
+            results = cursor.fetchone()
+            cursor.close()
+            conn.close()
+            if results:
+                return results
+
+        except Exception as e:
+            logging.error(f"{e}: {''.join(traceback.format_exception(None, e, e.__traceback__))}")
+            return 500

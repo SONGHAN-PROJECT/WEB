@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-
+<head>
     <title>SH</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,116 +9,118 @@
     <meta name="keywords" content="HTML5, Bootstrap 3, CSS3, javascript, PHP, Responsive, Mobile">
     <meta name="author" content="GraphBerry.com"/>
     <!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i" rel="stylesheet">
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/slick.css">
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
-     <link rel="stylesheet" type="text/css" href="static/css/upload.css">
-
-  </head>
-  <body>
-    <!-- [S]basic-N1 -->
-    {% include url_for('static', filename='header.html') %}
-    <main>
-      <div class="container">
-        <form class="upload-box" action="/upload" method="POST" onsubmit="requestUploadArticle(event)">
-          <div class="upload-header">
-            <div>글 작성하기</div>
-          </div>
-          <div class="upload-main">
-            <div class="input-group">
-              <input required type="text" name="title" id="title" />
-              <label for="title">제목</label>
+    <link rel="stylesheet" type="text/css" href="../static/css/upload.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+<body>
+<!-- [S]basic-N1 -->
+{% include url_for('static', filename='header.html') %}
+<main>
+    <br><br>
+    <div class="container">
+        <form class="upload-box" action="/upload" method="POST" enctype="multipart/form-data" onsubmit="requestUploadArticle(event)">
+            <div class="upload-header">
+                <div>글 작성하기</div>
             </div>
-          </div>
-
-          <div class="input-group">
-            <textarea
-              required
-              type= "text"
-              name="description"
-              id="description"
-            ></textarea>
-            <label for="description">본론</label>
-          </div>
-          <div class="button-container">
-            <div class="button-area">
-              <div style="color: white">
-                <button type="submit" class="btn btn-dark">글 작성하기</button>
-              </div>
+            <div class="upload-main">
+                <div class="input-group">
+                    <input required type="text" name="title" id="title" />
+                    <label for="title">제목</label>
+                </div>
+                <div class="input-group">
+                    <textarea required type="text" name="description" id="description"></textarea>
+                    <label for="description">본론</label>
+                </div>
+                <div class="input-group">
+                    <input type="file" name="image" id="image" accept="image/*" onchange="previewImage(event)">
+                    <label for="image">이미지 첨부</label>
+                </div>
+                <div class="input-group">
+                    <img id="image-preview" src="#" alt="이미지 미리보기" style="display:none; max-width: 100%; height: auto;" />
+                </div>
             </div>
-          </div>
+            <div class="button-container">
+                <div class="button-area">
+                    <div style="color: white">
+                        <button type="submit" class="btn btn-dark">글 작성하기</button>
+                    </div>
+                </div>
+            </div>
         </form>
-      </div>
-    </main>
-     {% include url_for('static', filename='footer.html') %}
-    <script>
-      const requestUploadArticle = (event) => {
+    </div>
+</main>
+{% include url_for('static', filename='footer.html') %}
+<script>
+    const requestUploadArticle = (event) => {
         event.preventDefault();
         const title = document.querySelector("#title");
         const description = document.querySelector("#description");
+        const image= document.querySelector("#image");
 
         const uploadData = new FormData(
-          document.querySelector("form.upload-box")
+            document.querySelector("form.upload-box")
         );
 
-        fetch("{{url_for('upload')}}", {
-          method: "POST",
-          body: uploadData,
+        fetch("/upload", {
+            method: "POST",
+            body: uploadData,
         })
-          .then((response) => {
+        .then((response) => {
             var message = "";
             var url = "";
             switch (response.status) {
-              case 200:
-                message = "글이 성공적으로 작성되었습니다";
-                url = "/board";
-                break;
+                case 200:
+                    message = "글이 성공적으로 작성되었습니다";
+                    url = "/board";
+                    break;
 
-              case 401:
-                message = "글 작성에 실패하였습니다";
-                url = location.href;
-                break;
+                case 401:
+                    message = "글 작성에 실패하였습니다";
+                    url = location.href;
+                    break;
 
-              case 403:
-                message = "로그인을 먼저 해주세요";
-                url = "/login";
-                break;
+                case 403:
+                    message = "로그인을 먼저 해주세요";
+                    url = "/login";
+                    break;
 
-              case 500:
-                message = "서버 내부 에러가 발생하였습니다";
-                url = location.href;
-                break;
+                case 500:
+                    message = "서버 내부 에러가 발생하였습니다";
+                    url = location.href;
+                    break;
 
-              default:
-                message = "클라이언트 오류가 발생하였습니다"+response.status;
-                url = location.href;
-                break;
+                default:
+                    message = "클라이언트 오류가 발생하였습니다" + response.status;
+                    url = location.href;
+                    break;
             }
             alert(message);
             location.href = url;
-          })
-          .catch((err) => {
+        })
+        .catch((err) => {
             document.write(`에러 메세지\n ${err}`);
-          });
-      };
-    </script>
+        });
+    };
+</script>
 
-    <!-- [E]basic-N4 -->
-   <!-- Scripts -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="js/smooth-scroll.min.js"></script>
-	<script type="text/javascript" src="js/modernizr.mq.js"></script>
-	<script type="text/javascript" src="js/slick.min.js"></script>
+<!-- [E]basic-N4 -->
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/smooth-scroll.min.js"></script>
+<script type="text/javascript" src="js/modernizr.mq.js"></script>
+<script type="text/javascript" src="js/slick.min.js"></script>
 
-	<!-- Latest compiled and minified JavaScript Bootstrap-->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Latest compiled and minified JavaScript Bootstrap-->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-	<!-- Custom JS -->
-	<script src="js/custom.js"></script>
-  </body>
+<!-- Custom JS -->
+<script src="js/custom.js"></script>
+</body>
 </html>

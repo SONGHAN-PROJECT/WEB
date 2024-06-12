@@ -9,7 +9,7 @@
     <meta name="keywords" content="HTML5, Bootstrap 3, CSS3, javascript, PHP, Responsive, Mobile">
     <meta name="author" content="GraphBerry.com"/>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i" rel="stylesheet">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/slick.css">
     <link rel="stylesheet" type="text/css" href="../static/css/style.css">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
 </head>
 <style>
     body {
@@ -33,16 +33,15 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow: auto; /* 수직 스크롤이 필요한 경우 표시 */
-    height: 80vh; /* 화면 높이의 80%로 설정 */
+    overflow: auto;
+    height: 80vh;
 }
 
     .chat-box {
         padding: 20px;
-        height: 580px; /* Adjusted height to accommodate buttons */
+        height: 580px;
         overflow-y: scroll;
     }
-
 
     .message {
         border-radius: 5px;
@@ -67,7 +66,7 @@
         width: calc(100% - 40px);
         padding: 10px 20px;
         border: 1px solid #ccc;
-        border-radius: 20px; /* Adjusted border-radius */
+        border-radius: 20px;
         margin: 10px;
         overflow: hidden;
         box-sizing: border-box;
@@ -81,7 +80,7 @@
         padding: 10px 15px;
         margin: 5px;
         cursor: pointer;
-        float: left; /* Floating the buttons to make them appear in the same line */
+        float: left;
     }
 
     span {
@@ -107,53 +106,74 @@
 </div>
 </main>
 {% include url_for('static', filename='footer.html') %}
+
 <script>
-    function addAmount(amount) {
-    console.log('가격추가')
-    var postData = {
-        value: amount
-    };
-    fetch("http://203.250.133.111:8080/send_message/{{article['id']}}", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(postData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        const new_amount=data.amount
-        console.log(new_amount)
-        var messageElement = document.createElement('div');
-        messageElement.classList.add('message', 'user-message');
+    document.addEventListener('DOMContentLoaded', function(){
+        const socket = io('http://203.250.133.111:8080');
 
-        var currentUserId = '{{ current_user.get_id() if current_user.is_authenticated else "Anonymous" }}';
-        messageElement.innerText = currentUserId + "님이 " + amount + "원을 입력했습니다. 현재 총액: " + new_amount + "원";
+        function addAmount(amount) {
+            console.log('가격추가');
+            var postData = {
+                value: amount
+            };
+            fetch("http://203.250.133.111:8080/send_message/{{article['id']}}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const new_amount = data.amount;
+                console.log(new_amount);
 
-        // Add the message to the chat box
-        var chatBox = document.getElementById('chatBox');
-        chatBox.appendChild(messageElement);
+                var currentUserId = '{{ current_user.get_username() if current_user.is_authenticated else "Anonymous" }}';
 
-        // Scroll to the bottom of the chat box
-        chatBox.scrollTop = chatBox.scrollHeight;
-    })
-    .catch(error => {
-        console.error('네트워크 오류:', error);
+                socket.emit('message', {
+                    user: currentUserId,
+                    amount: amount,
+                    total: new_amount
+                });
+            })
+            .catch(error => {
+                console.error('네트워크 오류:', error);
+            });
+        }
+
+        socket.on('message', function(data) {
+            var messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'user-message');
+            messageElement.innerText = data.user + "님이 " + data.amount + "원을 추가했습니다. 현재 입찰액: " + data.total + "원";
+
+            var chatBox = document.getElementById('chatBox');
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+
+        socket.on('server_message', function(data) {
+            var messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'bot-message');
+            messageElement.innerText = data.data;
+
+            var chatBox = document.getElementById('chatBox');
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+
+        window.addAmount = addAmount;
     });
-}
-
 </script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/smooth-scroll.min.js"></script>
+    <script type="text/javascript" src="js/modernizr.mq.js"></script>
+    <script type="text/javascript" src="js/slick.min.js"></script>
 
-	<!-- Scripts -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="js/smooth-scroll.min.js"></script>
-	<script type="text/javascript" src="js/modernizr.mq.js"></script>
-	<script type="text/javascript" src="js/slick.min.js"></script>
+    <!-- Latest compiled and minified JavaScript Bootstrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-	<!-- Latest compiled and minified JavaScript Bootstrap-->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-	<!-- Custom JS -->
-	<script src="js/custom.js"></script>
+    <!-- Custom JS -->
+    <script src="js/custom.js"></script>
 </body>
 </html>

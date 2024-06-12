@@ -36,8 +36,6 @@
             {% endif %}
           </div>
           <div class="article-footer">
-              <div>작성자 {{article["username"]}}</div>
-              <div>작성 시간 {{article["created_at"]}}</div>
               <div class="button-area" style="display: flex; justify-content: space-between;">
                   <button type="button" class="btn delete-btn" onClick="deleteRequest(event)">글 삭제하기</button>
                   <button type="button" class="btn delete-btn" onclick="location.href='/chat/' + {{article['id']}}">CHAT</button>

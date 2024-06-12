@@ -25,10 +25,9 @@ def execute_query(operation, params=None):
     try:
         # 연결을 가져옴
         connection = get_connection()
-        print('db연결완료')
+
         # 쿼리 수행
         cursor = connection.cursor(dictionary=True)
-        print(operation)
 
         if params:
             cursor.execute(operation, params)

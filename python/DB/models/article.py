@@ -30,7 +30,6 @@ class Article:
             "start_time": self.start_time,
             "description": self.description,
             "image": self.image
-            # "user_id": self.user_id
         }
 
     @staticmethod
